@@ -1,0 +1,19 @@
+The name of the game is coming up with accurate transition probabilities from some "STATE" (not necessarily markov)
+to a growth state.
+
+I.e. coming up with the best most probabilistic crystal ball ever. In the same way card counting gives you a
+probabalistic crystal ball.
+
+Once this is done, the rest of the model should write itself, with a basic enough state space.
+
+HOWEVER! There are 2 cases to consider.
+
+I. Single dimensional case. I.e. some information in t-1 unit gives probability of state in t unit.
+
+II. Multi-dimensional case. I.e. some information from the period [t - k, t - 1] units give probability of state in t unit.
+
+So far, we have only been concerned with I. As far as I'm concerned, we have not even scratched the surface of the
+single dimensional case just yet. There is a definite remaining action item here:
+
+1. TRANSITION PROBABILITY MATRIX CONTOURS: I define this as intersecting probability matrices between two sets of markov
+states.

@@ -1,0 +1,16 @@
+[
+  {
+    "Ticker": "SPY",
+    "Avg Alpha": 0.009753780215228769,
+    "Adj Alpha": 0.0013,
+    "M_P": 6.31041,
+    "BH_P": 5.60098,
+    "Ind Removed": 11,
+    "Avg. Markov_R/MU_T": 1.141716030963602,
+    "Percentile (Against Random)": null,
+    "Avg. BuyHold_R/MU_T": 1.1319622507483733,
+    "Random Mean": null,
+    "Random Standard Deviation": null,
+    "macro_t_units": 13.9
+  }
+]

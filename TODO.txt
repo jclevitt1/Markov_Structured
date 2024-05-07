@@ -1,0 +1,59 @@
+TODO'S:
+3.16
+1. Fitting continuous PDF to a model. Of course lognormal to returns is default options, but BLACK SWAN event
+is VERY BAD for this. Probably will have higher returns than other distributions that account for black swan events.
+
+Recommendation from YT video watched was FRACTAL CASCADE MODELLING. I know nothing about this, but remember from the vid
+it made sense lmao. Look into this and determine if it is worth fitting daily returns to.
+
+2. Add Sharpe Ratio, Sotrino, Max Drawdown metrics to reports of each model.
+
+3. Make value report generation have an 'AGGREGATE' option in which it takes in a list of tickers and judges performance
+based on the entire list given.
+
+4. COL_TO_MA may be messing up my technical var's. :( check on the implementation of each.
+
+3.10 Other Things To Think About
+1. Overall model scoring- how to approach this?
+
+2. Using scoring system in strategy determiner to be optimizing function for some ML fit algo
+
+3. HEAVILY PUNISH THE YEARLY DEVIATION IN ALPHA (will have to do some cleanup to not include the remainder yr if less than
+a certain no of days.
+
+EVENTUALLY
+
+---
+
+Place we left off:
+1. Implmeenting the "maximum return function" given state space & historical data to have immediate benchmark.
+
+2. Begin making state spaces for TA variables and doing state space analysis.
+
+---
+
+
+* Implement state determiner, markov strategy, for Czech volatility and volume.
+
+* Implement the first derivative strategy to modify transition probabilities to be even more accurate.
+
+* Begin to devise strategy on identifying powerful combinations of comobo states from intersecting Markov models.
+
+* Think over if empirical probability calculation is powerful enough for transition probability matrix.
+
+* think about how to integrate the theoretic
+
+* Implement abstraction of basic feature selection dependent on markov state determiner
+
+* Implement abstraction of strategy determiner based on the start --> finish by the strategydeterminer.
+
+* Implement some sort of caching system here. For now, we want functions such as "give max return for state space",
+which calls a lot of functions we will be calling in the report generation process.
+
+THE NAME OF THE GAME IS COMING UP WITH ACCURATE TRANSITION PROBABILITIES, NOT JUST FOR THE 1D, 1D CASE OF
+TRANSITION PROBABILITY MATRIX ON A SINGLE MARKOV STATE DETERMINER.
+
+Where t
+
+
+*

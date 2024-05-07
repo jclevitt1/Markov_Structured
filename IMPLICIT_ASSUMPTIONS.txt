@@ -1,0 +1,9 @@
+The purpose of this text doc is to outline any implicit assumptions made by my model, to be evaluated once again later on.
+
+ASSUMPTIONS:
+
+1. Market actors have a short-term memory. Past k days back, technical variables do not indicate their day-to-day
+decision making.
+
+This assumption is correct in the strictest sense (for any value of k), but is incorrect when we restrict k to
+say 20 time units. This is
