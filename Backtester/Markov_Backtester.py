@@ -26,9 +26,11 @@ class MarkovBacktester:
         last_p = self.p
         for i in range(1, len(data)):
             prev_state = data.iloc[i - 1]['state']
-            if markov_strategy.invest_based_on_yesterday_state(prev_state):
+            to_invest, s = markov_strategy.invest_based_on_yesterday_state(prev_state)
+            if to_invest:
                 self.total_days_invested += 1
-                self.p *= (1 + data.iloc[i]['daily_return'])
+                # This is wrong
+                self.p *= (1 + s * data.iloc[i]['daily_return'])
             if i % DIVIDING_TIME_UNIT == 0 or i == len(data) - 1:
                 index_prev = i - DIVIDING_TIME_UNIT
                 bh_dt = 1 + (data.iloc[i]['Adj Close'] - data.iloc[index_prev]['Adj Close'] ) / data.iloc[index_prev]['Adj Close']
@@ -46,7 +48,7 @@ class MarkovBacktester:
         injected_state_0_cov_map = None
         injected_state_return_0_cov_map = None
 
-        if state_determiner.is_ordered():
+        if state_determiner is not None and state_determiner.is_ordered():
             normal_cov_map = {}
             injected_state_0_cov_map = {}
             injected_state_return_0_cov_map = {}

@@ -1,0 +1,6 @@
+{
+  // contains the names of the hyperparameters of the selected distribution (in the same order as the distribution listed).
+  "hp_names": ['hp_name1', 'hp_name2'],
+  // Is a 2d list of values representing all HPS to iteratively fit a distribution to.
+  "hp_vals_list" : [['hp_val1_1', 'hp_val2_1'], ['hp_val1_2', 'hp_val2_2']]
+}

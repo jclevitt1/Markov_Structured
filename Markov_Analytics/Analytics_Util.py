@@ -24,6 +24,7 @@ def calculate_after_state_geo_means_given_prev_state(data, prev_state, prev_stat
             after_state_means[after_state] *= (1 + data.iloc[i][col_in_q])
             after_state_ns[after_state] += 1
     for state in possible_states_after:
+        # check on this (1/after_state_ns)
         after_state_means[state] = after_state_means[state] ** (1 / after_state_ns[state]) if after_state_ns[state] else 1
     return after_state_means
 
