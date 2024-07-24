@@ -2,7 +2,7 @@
 Acts as an interface for Markov State Determiners.
 
 State Determiners may do whatever in the background, but must always have some "assign_state_to_vals" and
-assign_state to data functions within them.
+assign_state to data within them.
 State Determiners should also have a clean_data_after_state assignment, which cleans the DF in the case where
 moving values were used.
 """

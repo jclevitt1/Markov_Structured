@@ -6,5 +6,6 @@ class Scraper:
 
     def add_features(self, data, L=20):
         data['daily_return'] = data['Adj Close'].pct_change()
+        data['return'] = data['Adj Close'].pct_change()
         data['volume_change'] = data['Volume'].pct_change()
         add_basic_technical_analysis_vars(data)
