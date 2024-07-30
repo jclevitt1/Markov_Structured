@@ -35,6 +35,7 @@ def shorten_reports(reports, keys_to_remove=['M/BH DTs', 'markov_dts', 'buy_hold
     return copy_reports
 
 def generate_figs(reports, include_state_det_value_metrics=False, data=None):
+    shortened_reports = shorten_reports(reports)
     figs = []
     for report in reports:
         figs.append(generate_return_graph(report))
@@ -124,7 +125,7 @@ def generate_alpha_graph(report):
 
 def generate_pdf_report(reports, filename, file_prefix='report_outputs/report_graphs/', include_state_det_value_metrics=False, data=None):
     figures = generate_figs(reports, include_state_det_value_metrics=include_state_det_value_metrics, data=data)
-    save_all_figures_to_single_pdf(figures, filename, file_prefix=file_prefix)
+    save_all_figures_to_single_pdf(figures, filename, file_prefix=file_prefix, shortened_reports=shortened_reports)
 
 def partial_cov_map(reports):
     return

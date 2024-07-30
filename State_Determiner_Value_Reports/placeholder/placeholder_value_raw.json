@@ -1,0 +1,44 @@
+[
+  {
+    "Ticker": "SPY",
+    "Avg Alpha": 0.485569434577368,
+    "Adj Alpha": 0.3003,
+    "M_P": 799.93348,
+    "BH_P": 5.60098,
+    "Ind Removed": 9,
+    "Avg. Markov_R/MU_T": 1.6175316853257413,
+    "Percentile (Against Random)": null,
+    "Avg. BuyHold_R/MU_T": 1.1319622507483733,
+    "Random Mean": null,
+    "Random Standard Deviation": null,
+    "macro_t_units": 13.9
+  },
+  {
+    "Ticker": "JPM",
+    "Avg Alpha": NaN,
+    "Adj Alpha": NaN,
+    "M_P": -9.09018,
+    "BH_P": 6.02115,
+    "Ind Removed": 7,
+    "Avg. Markov_R/MU_T": NaN,
+    "Percentile (Against Random)": null,
+    "Avg. BuyHold_R/MU_T": 1.1378684257173837,
+    "Random Mean": null,
+    "Random Standard Deviation": null,
+    "macro_t_units": 13.9
+  },
+  {
+    "Ticker": "WFC",
+    "Avg Alpha": NaN,
+    "Adj Alpha": NaN,
+    "M_P": -0.00051,
+    "BH_P": 2.47067,
+    "Ind Removed": 11,
+    "Avg. Markov_R/MU_T": NaN,
+    "Percentile (Against Random)": null,
+    "Avg. BuyHold_R/MU_T": 1.0672349849269933,
+    "Random Mean": null,
+    "Random Standard Deviation": null,
+    "macro_t_units": 13.9
+  }
+]
