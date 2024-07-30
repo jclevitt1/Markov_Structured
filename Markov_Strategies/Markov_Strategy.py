@@ -24,13 +24,9 @@ class MarkovStrategy():
     Additional bool allows for strategy to be conjoined with additional strategy. The other strategy only needs to
     output decision of TRUE or FALSE to buy/not, given by additional bool. For all cases now, this is None.
     """
-    def __init__(self, conditions, bets=None):
-        self.conditions = conditions
-        self.bets = bets
+    def __init__(self, bet_dict):
+        self.bet_dict = bet_dict
     def invest_based_on_yesterday_state(self, prev_state, additional_bool=None):
-        for i, buying_state_condition in enumerate(self.conditions):
-            if prev_state == buying_state_condition:
-                if self.bets:
-                    return True, self.bets[i]
-                return True, 1
+        if prev_state in self.bet_dict:
+            return True, self.bet_dict[prev_state]
         return False, 0

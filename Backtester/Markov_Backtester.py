@@ -29,7 +29,6 @@ class MarkovBacktester:
             to_invest, s = markov_strategy.invest_based_on_yesterday_state(prev_state)
             if to_invest:
                 self.total_days_invested += 1
-                # This is wrong
                 self.p *= (1 + s * data.iloc[i]['daily_return'])
             if i % DIVIDING_TIME_UNIT == 0 or i == len(data) - 1:
                 index_prev = i - DIVIDING_TIME_UNIT

@@ -1,6 +1,8 @@
 from Driver.driver import assign_states_and_calculate_transition_probabilities, shorten_reports_and_write_json_pdfs
 from Markov_Analytics.Analytics_Util import get_macro_units
 from Markov_Analytics.Optimal_Quick_Calculation import get_max_1d_return_and_generate_dict_report
+from Markov_Strategy_Determiner.Geometric_Mean_Probability_Optimizer import GeometricMeanProbabilityOptimizer
+from Markov_Strategy_Determiner.Markov_Strategy_Determiner import MarkovStrategyDeterminer
 from Transition_Probability_Calculation.Empirical_Calculator import EmpiricalCalculator
 import os
 
@@ -17,19 +19,24 @@ This should output:
 
 """
 
-def generate_value_report_from_scratch(ticker, state_determiner, scraper, start='2010-01-01', end='2024-01-01', transition_probability_calculator=None,
+def generate_value_report_from_scratch(tickers, state_determiner, scraper, strategy_determiner: MarkovStrategyDeterminer = GeometricMeanProbabilityOptimizer,
+                                       start='2010-01-01', end='2024-01-01', transition_probability_calculator=None,
                                        test_against_random=False, N=100, col_to_optimize='daily_return', threshold=1,
                                        value_report_prefix='State_Determiner_Value_Reports', sd_name='placeholder'):
-    print('Generating Value Report on State Space . . .')
-    data = scraper.download_and_add_features(ticker)
-    macro_units = get_macro_units(start, end)
-    return generate_value_report_from_data(ticker, data, state_determiner, transition_probability_calculator=transition_probability_calculator,
+    datas = {}
+    for ticker in tickers:
+        print(f'TCKR: {ticker} - Generating Value Report on State Space . . .')
+        datas[ticker] = scraper.download_and_add_features(ticker)
+        macro_units = get_macro_units(start, end)
+    return generate_value_report_from_datas(tickers, datas, state_determiner, strategy_determiner=strategy_determiner,
+                                           transition_probability_calculator=transition_probability_calculator,
                                            macro_units=macro_units, col_to_optimize=col_to_optimize, threshold=threshold,
                                            test_against_random=False, N=100,
                                            value_report_prefix=value_report_prefix, sd_name=sd_name)
 
 
-def generate_value_report_from_data(ticker, data, state_determiner, transition_probability_calculator=None, macro_units=1,
+def generate_value_report_from_datas(tickers, datas, state_determiner, strategy_determiner: MarkovStrategyDeterminer = GeometricMeanProbabilityOptimizer,
+                                    transition_probability_calculator=None, macro_units=1,
                                     col_to_optimize='daily_return',threshold=1, test_against_random=False, N=100,
                                     value_report_prefix='State_Determiner_Value_Reports', sd_name='STATE_DET_NAME'):
 
@@ -44,14 +51,19 @@ def generate_value_report_from_data(ticker, data, state_determiner, transition_p
     if not transition_probability_calculator:
         transition_probability_calculator = EmpiricalCalculator(state_determiner.possible_states)
 
-    data, transition_probability_matrix = assign_states_and_calculate_transition_probabilities(data, state_determiner, transition_probability_calculator)
+    return_dicts = []
+    for ticker in tickers:
+        data = datas[ticker]
+        data, transition_probability_matrix = assign_states_and_calculate_transition_probabilities(data, state_determiner, transition_probability_calculator)
 
-    oned_return_dict = get_max_1d_return_and_generate_dict_report(ticker, data, transition_probability_matrix, state_determiner,
-                                         col_to_optimize=col_to_optimize, threshold =threshold,
-                                                                  test_against_random=test_against_random, N=N)
+        return_dicts.append(get_max_1d_return_and_generate_dict_report(ticker, data, transition_probability_matrix, state_determiner,
+                                            strategy_determiner=strategy_determiner,
+                                             col_to_optimize=col_to_optimize, threshold =threshold,
+                                                                      test_against_random=test_against_random, N=N))
 
-    shorten_reports_and_write_json_pdfs([oned_return_dict], json_file=json_file, pdf_file=pdf_file,
+    shorten_reports_and_write_json_pdfs(return_dicts, json_file=json_file, pdf_file=pdf_file,
                                         json_file_prefix=json_file_prefix,
-                                        pdf_file_prefix=pdf_file_prefix, include_state_det_value_metrics=True, data=data)
-    return data, oned_return_dict
+                                        pdf_file_prefix=pdf_file_prefix,
+                                        include_state_det_value_metrics=True, data=data)
+        # return data, oned_return_dict
 

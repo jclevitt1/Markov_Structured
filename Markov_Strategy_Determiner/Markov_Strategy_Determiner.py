@@ -43,18 +43,20 @@ class MarkovStrategyDeterminer:
 
     def determine_optimal_strategy(self):
         # Get geo mean of states.
-        buying_conditions = []
+        buying_conditions = {}
         for prev_state in self.possible_states_before:
             # Turn this into a list.
-            if self.does_prev_state_meet_threshold(prev_state):
-                buying_conditions.append(prev_state)
+            bet_size, bool_bet = self.does_prev_state_meet_threshold(prev_state)
+            if bool_bet:
+                buying_conditions[prev_state] = bet_size
         return buying_conditions
 
-    def does_prev_state_meet_threshold(self, prev_state):
+    def does_prev_state_meet_threshold(self, prev_state, score_is_bet_size=False):
         score = self.score(prev_state)
+        bet = 1*int(score >= self.threshold) if not score_is_bet_size else score
         if score >= self.threshold:
-            return True
-        return False
+            return bet, True
+        return bet, False
 
     def score(self, prev_state):
         raise "Subclass should implement."
