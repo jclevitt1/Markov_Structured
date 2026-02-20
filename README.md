@@ -102,4 +102,4 @@ Python, NumPy, Pandas, SciPy (KDE), matplotlib (PDF reports), Yahoo Finance API,
 
 ## Status
 
-Research framework / proof of concept. Built for exploring whether Markov state transitions provide a statistically significant edge in equity trading.
+Research framework built for exploring whether Markov state transitions provide a statistically significant edge in equity trading. The architecture is designed to be modular: swap in a new state model, probability calculator, or optimization strategy without touching the rest of the pipeline.
